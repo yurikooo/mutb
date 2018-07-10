@@ -2,9 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="hogehoge">
     <meta name="viewport" content="width=device-width">
-    <title>東京海上日動</title>
+    <title>三菱UFJ</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css"></link>
     <link href="style.css" rel="stylesheet" type="text/css"></link>
@@ -15,7 +14,8 @@
 <div id="app">
  <v-app id="example-4" standalone>
 	<v-content>
-		<%= connectResults[1].noticeoverview__c %>
+<!--		<%= connectResults[0].noticeoverview__c %> -->
+Twitterの更新グラフ用
 	    </v-content>
 	</v-app>
 </div>
@@ -27,56 +27,6 @@
 	  el: '#app',
 	  data: () => ({
 		  gradient 	: 'to top, #7B1FA2, #E1BEE7',
-	      drawer 	: null,
-	      dialog1	: false,
-	      dialog2	: false,
-	      page: 1,
-	      valid: true,
-	      noticeoverview 	:'',
-	      status 			:'',
-	      agentcomments 	:'',
-	      status: [
-	    	{ text: '未対応' },
-	    	{ text: '対応済' }
-	      ],
-	      items: [
-	        { icon: 'keyboard_arrow_down', text: '業務' },
-	        { icon: 'pie_chart', text: 'ダッシュボード' },
-	        { icon: 'note', text: 'タスク管理' },
-	        { icon: 'content_copy', text: 'プロセス管理' },
-	        { icon: 'domain', text: '学習ツール' },
-	        { icon: 'share', text: 'マーケティングツール' },
-	        { icon: 'device_hub', text: '代理店経理' },        
-	        {
-	          icon: 'keyboard_arrow_down',
-	          text: '商談',
-	          model: true,
-	          children: [
-	            { icon: 'highlight', text: '事前準備' },
-	            { icon: 'sync', text: '商談中' }
-	          ]
-	        },
-	        { icon: 'people', text: 'フォローアップ' },        
-	        { icon: 'trending_up', text: 'セールスツール' },        
-	        {
-	          icon: 'keyboard_arrow_up',
-	          'icon-alt': 'keyboard_arrow_down',
-	          text: 'More',
-	          model: false,
-	          children: [
-	            { text: 'Import' },
-	            { text: 'Export' },
-	            { text: 'Print' },
-	            { text: 'Undo changes' },
-	            { text: 'Other contacts' }
-	          ]
-	        },
-	        { icon: 'settings', text: 'Settings' },
-	        { icon: 'chat_bubble', text: 'Send feedback' },
-	        { icon: 'help', text: 'Help' },
-	        { icon: 'phonelink', text: 'App downloads' },
-	        { icon: 'keyboard', text: 'Go to the old version' }
-	      ]
 		}),
 	    props: {
 	      source: String
