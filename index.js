@@ -33,7 +33,7 @@ axios.get('/?accountid=')
     console.log("________req.data------------- ")
     console.log(req.data);
     console.log("________req_________ ")
-    console.log(rew);
+    console.log(req);
     console.log("_________________ ")
   });
 
