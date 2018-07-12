@@ -22,14 +22,6 @@ const client = new Client({
 });
 client.connect();
 
-app.get('/', function(req, res){
-  const query = req.query;
-    console.log("________query_________ ")
-    console.log(query);
-    console.log("________________")
-
-});
-
 /*
  * ExpressJS View Templates
  */
