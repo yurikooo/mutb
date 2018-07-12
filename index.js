@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
 const { Pool, Client } = require('pg');
+const axios = require('axios');
 var bodyParser = require('body-parser');
 var app = express();
 var portNum = (process.env.PORT || 5050);
@@ -20,6 +21,23 @@ const client = new Client({
   ssl: true
 });
 client.connect();
+
+
+// Make a request for a user with a given ID
+axios.get('?accountid=')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+
+
 
 /*
  * ExpressJS View Templates
@@ -41,7 +59,7 @@ app.use(bodyParser.json());
  * Jobs Landing Page
  */
 //client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2', (err,res)=>{
-client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc', (err,res)=>{
+client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc where accountid__c = 0016F00002P7OT8QAN', (err,res)=>{
     console.log("_________________ ")
     console.log(res.size)
     console.log(res.rows[0])
