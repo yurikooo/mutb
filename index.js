@@ -22,16 +22,6 @@ const client = new Client({
 });
 client.connect();
 
-
-// Make a request for a accountid with a given ID
-axios.get('https://mutb.herokuapp.com/?accountid=')
-  .then(function (req,res) {
-    // handle success
-    console.log("________req_________ ")
-    console.log(req);
-    console.log("_________________ ")
-  });
-
 app.get('/', function(req, res){
   const query = req.query;
     console.log("________query_________ ")
@@ -70,10 +60,21 @@ client.query('SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid_
 
 //表示用最新２つの情報
 app.get('/',function (req, res){
-    var query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
+    const param = req.query;
+    console.log("________param_________ ")
+    console.log(param);
+    console.log("________________")
+
+    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = ' + param + 'order by salesforce.SNS__c.id desc limit 2';
+
+    console.log("________query_________ ")
+    console.log(query);
+    console.log("________________")
     var result = [];
     client.query(query, function(err, result){
         console.log("Jobs Query Result Count: " + result.rows);
+
+
 
         // レンダリング実行
         res.render('index', {connectResults: result.rows});
