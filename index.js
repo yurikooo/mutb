@@ -27,29 +27,17 @@ client.connect();
 axios.get('https://mutb.herokuapp.com/?accountid=')
   .then(function (req,res) {
     // handle success
-    console.log("________req.params_________ ")
-    console.log(req.params);
-    console.log("________req.data------------- ")
-    console.log(req.data);
     console.log("________req_________ ")
     console.log(req);
     console.log("_________________ ")
   });
 
-var http = require("https");
-var url = require('url');
- 
-var server = http.createServer();
-server.on("request",function(req,res){
-  var reqBody = "";
-  req.on('data',function(data){
-    reqBody += data
-  }).on('end',function(){
-    res.setHeader('Content-Type','text/plane');
-    var url_parts = url.parse(req.url,true);
-    res.write(url_parts.query.accountid);
-    res.end();
-  });
+app.get('/', function(req, res){
+  const query = req.query;
+    console.log("________query_________ ")
+    console.log(query);
+    console.log("________________")
+
 });
 
 /*
