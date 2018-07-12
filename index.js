@@ -27,8 +27,11 @@ client.connect();
 axios.get('https://mutb.herokuapp.com/?accountid')
   .then(function (response) {
     // handle success
+    console.log("________response_________ ")
+    console.log(response);
     console.log(response.data);
     console.log(error.status);
+    console.log("_________________ ")
   });
 
 
