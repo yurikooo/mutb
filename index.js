@@ -22,21 +22,16 @@ const client = new Client({
 });
 client.connect();
 
-// Make a request for a accountid with a given ID
-axios.get('http://localhost:5050/?accountid=112233')
-  .then(function (res) {
-    // handle success
-    console.log("________req.params_________ ")
-    console.log(res.params);
-    console.log("_________________ ")
-  });
 
 // Make a request for a accountid with a given ID
-axios.get('https://mutb.herokuapp.com/?accountid=112233')
+//axios.get('https://mutb.herokuapp.com/?accountid=112233')
+axios.get('/?accountid=')
   .then(function (req,res) {
     // handle success
     console.log("________req.params_________ ")
     console.log(req.params);
+    console.log("________req.data------------- ")
+    console.log(req.data);
     console.log("________err.status_________ ")
     console.log(err.status);
     console.log("_________________ ")
