@@ -41,26 +41,41 @@ app.use(bodyParser.json());
 //表示用最新２つの情報
 app.get('/',function (req, res){
     const param = req.query;
+    var query;
     console.log("________param_________ ")
     console.log(param);
     console.log("________________")
 
-    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
+    if(param){
+      query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
 
-    console.log("________query_________ ")
-    console.log(query);
-    console.log("________________")
+      if(query){
 
-    var result = [];
-    client.query(query, function(err, result){
-    console.log("_________________ ")
-    console.log(result.rows[0])
-    console.log(result.rows[1])
-    console.log("_________________ ")
+        console.log("________query_________ ")
+        console.log(query);
+        console.log("________________")
 
-        // レンダリング実行
-        res.render('index', {connectResults: result.rows});
-    });
+        var result = [];
+
+        client.query(query, function(err, result){
+          console.log("_________________ ")
+          console.log(result.rows[0])
+          console.log(result.rows[1])
+          console.log("_________________ ")
+
+           // レンダリング実行
+          res.render('index', {connectResults: result.rows});
+        });
+
+      }else{
+        //res.redirect('/');
+      }
+
+    }
+
+//    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
+
+
 });
 
 //更新用
