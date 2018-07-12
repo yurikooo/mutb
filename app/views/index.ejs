@@ -15,7 +15,7 @@
  <v-app id="example-4" standalone>
 	<v-content>
 		<v-container>
-<!--		<%= connectResults[0].noticeoverview__c %> -->
+<!--		<%= connectResults[0].accountID__c %> -->
 				<div >
 					<h3>Twitterメッセージ</h3>
 					<span>最新情報</span>
@@ -23,12 +23,12 @@
 						最終ログイン：2018/07/10 23:00:52
 					</div>
 				</div>
-
+<%= connectResults[0].accountID__c %>
 				<v-textarea
 				　color="red lighten-1"
 		          box
 		          name="input-2-4"
-		          label="ID：yurikoooooooo　　　　　　　　アカウント名：ゆりこここ　　　　　　　　　現在時刻 ●：●●"
+		          label="ID：yurikoooooooo　　　　　　　　アカウント名：<%= connectResults[0].accountID__c %>　　　　　　　　　現在時刻 ●：●●"
 		          value="twitter用メッセージなう"
 		          value2="アカウント名"
 		        ></v-textarea>

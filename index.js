@@ -7,15 +7,15 @@ var portNum = (process.env.PORT || 5050);
 var server = app.listen(portNum, function(){
     console.log("Node app is running : " + server.address().port);
 });
-const dbString = process.env.DATABASE_URL || 'postgres://qhtfamlfqbwrot:07fb459dcea98c5c61668138497710a59185b90d97a23385e2550cb46124fefd@ec2-54-235-132-202.compute-1.amazonaws.com:5432/d66n03kivmoncc';
+const dbString = process.env.DATABASE_URL || 'postgres://whuwxxefiudqyi:1543eebdcb64434443ab892a0981ff9abb04a73b89cc85cda83309061c63d75a@ec2-54-83-59-239.compute-1.amazonaws.com:5432/dbt7dkha5jtt9v';
 //var dbString = process.env.DATABASE_URL;
 
 //DB接続を生成
 const client = new Client({
-  user: 'qhtfamlfqbwrot',
-  password: '07fb459dcea98c5c61668138497710a59185b90d97a23385e2550cb46124fefd',
-  host: 'ec2-54-235-132-202.compute-1.amazonaws.com',
-  database: 'd66n03kivmoncc',
+  user: 'whuwxxefiudqyi',
+  password: '1543eebdcb64434443ab892a0981ff9abb04a73b89cc85cda83309061c63d75a',
+  host: 'ec2-54-83-59-239.compute-1.amazonaws.com',
+  database: 'dbt7dkha5jtt9v',
   port: 5432,
   ssl: true
 });
@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 /*
  * Jobs Landing Page
  */
-client.query('SELECT * FROM salesforce.Notice__c order by salesforce.Notice__c.id desc limit 2', (err,res)=>{
+client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2', (err,res)=>{
     console.log("_________________ ")
     console.log(res.rows[0])
     console.log(res.rows[1])
@@ -49,7 +49,7 @@ client.query('SELECT * FROM salesforce.Notice__c order by salesforce.Notice__c.i
 
 //表示用最新２つの情報
 app.get('/',function (req, res){
-    var query = 'SELECT * FROM salesforce.Notice__c order by salesforce.Notice__c.id desc limit 2';
+    var query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
     var result = [];
     client.query(query, function(err, result){
         console.log("Jobs Query Result Count: " + result.rows);
