@@ -24,13 +24,15 @@ client.connect();
 
 
 // Make a request for a user with a given ID
-axios.get('https://mutb.herokuapp.com/?accountid')
-  .then(function (response) {
+axios.get('https://mutb.herokuapp.com/?accountid=')
+  .then(function (err,res) {
     // handle success
     console.log("________response_________ ")
-    console.log(response);
-    console.log(response.data);
-    console.log(error.status);
+    console.log(res);
+    console.log("________response.data_________ ")
+    console.log(res.data);
+    console.log("________err.status_________ ")
+    console.log(err.status);
     console.log("_________________ ")
   });
 
