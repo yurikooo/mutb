@@ -57,11 +57,12 @@ app.get('/',function (req, res){
     console.log(param);
     console.log("________________")
 
-    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = ' + param.accountid + 'order by salesforce.SNS__c.id desc limit 2';
+    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = ' + param.accountid + ' order by salesforce.SNS__c.id desc limit 2';
 
     console.log("________query_________ ")
     console.log(query);
     console.log("________________")
+
     var result = [];
     client.query(query, function(err, result){
         console.log("Jobs Query Result Count: " + result.rows);
