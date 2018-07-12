@@ -36,7 +36,21 @@ axios.get('https://mutb.herokuapp.com/?accountid=')
     console.log("_________________ ")
   });
 
-
+var http = require("https");
+var url = require('url');
+ 
+var server = http.createServer();
+server.on("request",function(req,res){
+  var reqBody = "";
+  req.on('data',function(data){
+    reqBody += data
+  }).on('end',function(){
+    res.setHeader('Content-Type','text/plane');
+    var url_parts = url.parse(req.url,true);
+    res.write(url_parts.query.accountid);
+    res.end();
+  });
+});
 
 /*
  * ExpressJS View Templates
