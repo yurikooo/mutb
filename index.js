@@ -38,18 +38,6 @@ app.use(bodyParser.json());
 
 
 
-/*
- * Jobs Landing Page
- */
-//client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2', (err,res)=>{
-client.query('SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = $1 order by salesforce.SNS__c.id desc limit 2',
-  ['0016F00002P7OT8QAN'],(err,res)=>{
-    console.log("_________________ ")
-    console.log(res.rows[0])
-    console.log(res.rows[1])
-    console.log("_________________ ")
-});
-
 //表示用最新２つの情報
 app.get('/',function (req, res){
     const param = req.query;
@@ -65,9 +53,10 @@ app.get('/',function (req, res){
 
     var result = [];
     client.query(query, function(err, result){
-        console.log("Jobs Query Result Count: " + result.rows);
-
-
+    console.log("_________________ ")
+    console.log(res.rows[0])
+    console.log(res.rows[1])
+    console.log("_________________ ")
 
         // レンダリング実行
         res.render('index', {connectResults: result.rows});
