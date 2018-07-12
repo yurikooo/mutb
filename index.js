@@ -25,10 +25,10 @@ client.connect();
 
 // Make a request for a user with a given ID
 axios.get('https://mutb.herokuapp.com/:accountid')
-  .then(function (err,res) {
+  .then(function (req,res) {
     // handle success
-    console.log("________response.params_________ ")
-    console.log(res.params);
+    console.log("________req.params_________ ")
+    console.log(req.params);
     console.log("________err.status_________ ")
     console.log(err.status);
     console.log("_________________ ")
