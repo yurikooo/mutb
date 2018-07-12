@@ -40,8 +40,10 @@ app.use(bodyParser.json());
 /*
  * Jobs Landing Page
  */
-client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2', (err,res)=>{
+//client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2', (err,res)=>{
+client.query('SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc', (err,res)=>{
     console.log("_________________ ")
+    console.log(res.size)
     console.log(res.rows[0])
     console.log(res.rows[1])
     console.log("_________________ ")
