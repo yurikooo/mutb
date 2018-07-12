@@ -54,8 +54,8 @@ app.get('/',function (req, res){
     var result = [];
     client.query(query, function(err, result){
     console.log("_________________ ")
-    console.log(res.rows[0])
-    console.log(res.rows[1])
+    console.log(result.rows[0])
+    console.log(result.rows[1])
     console.log("_________________ ")
 
         // レンダリング実行
