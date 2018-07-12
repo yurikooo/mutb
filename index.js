@@ -24,7 +24,7 @@ client.connect();
 
 
 // Make a request for a accountid with a given ID
-axios.get('https://mutb.herokuapp.com/?accountid=112233')
+axios.get('https://mutb.herokuapp.com/?accountid=')
   .then(function (req,res) {
     // handle success
     console.log("________req.params_________ ")
