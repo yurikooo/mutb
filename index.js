@@ -22,9 +22,19 @@ const client = new Client({
 });
 client.connect();
 
+// Make a request for a user with a given ID
+axios.get('http://localhost:5050/?:accountid')
+  .then(function (req,res) {
+    // handle success
+    console.log("________req.params_________ ")
+    console.log(req.params);
+    console.log("________err.status_________ ")
+    console.log(err.status);
+    console.log("_________________ ")
+  });
 
 // Make a request for a user with a given ID
-axios.get('https://mutb.herokuapp.com/:accountid')
+axios.get('https://mutb.herokuapp.com/?:accountid')
   .then(function (req,res) {
     // handle success
     console.log("________req.params_________ ")
