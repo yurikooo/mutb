@@ -57,6 +57,31 @@
 
 
 	<script type="text/javascript">
+		var urlParam = location.search.substring(1);
+ 
+// URLにパラメータが存在する場合
+if(urlParam) {
+  // 「&」が含まれている場合は「&」で分割
+  var param = urlParam.split('&');
+ 
+  // パラメータを格納する用の配列を用意
+  var paramArray = [];
+ 
+  // 用意した配列にパラメータを格納
+  for (i = 0; i < param.length; i++) {
+    var paramItem = param[i].split('=');
+    paramArray[paramItem[0]] = paramItem[1];
+  }
+ 
+  // パラメータidがosakaかどうかを判断する
+  if (paramArray.accountid == '112233') {
+    $('.pram').append('<p>112233です</p>');
+  } else {
+    $('.pram').append('<p>112233ではありません</p>');
+  }
+}
+
+
 	new Vue({
 	  el: '#app',
 	  data: () => ({
