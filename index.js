@@ -32,8 +32,8 @@ axios.get('/?accountid=')
     console.log(req.params);
     console.log("________req.data------------- ")
     console.log(req.data);
-    console.log("________err.status_________ ")
-    console.log(err.status);
+    console.log("________req_________ ")
+    console.log(rew);
     console.log("_________________ ")
   });
 
