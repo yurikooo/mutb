@@ -42,55 +42,44 @@ app.use(bodyParser.json());
 app.get('/',function (req, res){
     const param = req.query;
     var query;
+    var result = [];
+
     console.log("________param_________ ")
-    console.log(param);
+    console.log(param.accountid);
     console.log("________________")
 
-    if(param == true){
-      query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
-
-      if(query){
-
-        console.log("________query_________ ")
-        console.log(query);
-        console.log("________________")
-
-        var result = [];
-
-        client.query(query, function(err, result){
-          console.log("_________________ ")
-          console.log(result.rows[0])
-          console.log(result.rows[1])
-          console.log("_________________ ")
-
-           // レンダリング実行
-          res.render('index', {connectResults: result.rows});
-        });
+    //企業IDがない場合のエラーハンドリング
+    if(typeof param.accountid === "undefined" || param.accountid == null){
+      query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
+      client.query(query, function(err, result){
+        res.render('index', {connectResults: result.rows}); 
+      });
 
       //間違った企業IDの場合のエラーハンドリング
-      }else{
-         query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
-        if(query){
-          var result = [];
+    }else{
+      query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + 'QAN\' order by salesforce.SNS__c.id desc limit 2';
+      if(!query){
+          query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
           client.query(query, function(err, result){
             res.render('index', {connectResults: result.rows}); 
           });
-        }       
+        }else{
+          console.log("________query_________ ")
+          console.log(query);
+          console.log("________________")
 
-        //res.redirect('/');
-      }
-
-    //企業IDがない場合のエラーハンドリング
-    }else{
-        query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
-        if(query){
-          var result = [];
           client.query(query, function(err, result){
-            res.render('index', {connectResults: result.rows}); 
+            console.log("_________________ ")
+            console.log(result.rows[0])
+            console.log(result.rows[1])
+            console.log("_________________ ")
+
+             // レンダリング実行
+            res.render('index', {connectResults: result.rows});
           });
         }
-    }
-
+      }
+    
 //    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
 
 
