@@ -45,7 +45,7 @@ app.get('/',function (req, res){
     var result = [];
 
     console.log("________param_________ ")
-    console.log(param.accountid);
+    console.log(param);
     console.log("________________")
 
     //企業IDがない場合のエラーハンドリング
