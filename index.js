@@ -49,7 +49,7 @@ app.get('/',function (req, res){
     if(param == true){
       query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
 
-      if(query == true){
+      if(query){
 
         console.log("________query_________ ")
         console.log(query);
@@ -70,7 +70,7 @@ app.get('/',function (req, res){
       //間違った企業IDの場合のエラーハンドリング
       }else{
          query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
-        if(query == true){
+        if(query){
           var result = [];
           client.query(query, function(err, result){
             res.render('index', {connectResults: result.rows}); 
@@ -83,7 +83,7 @@ app.get('/',function (req, res){
     //企業IDがない場合のエラーハンドリング
     }else{
         query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
-        if(query == true){
+        if(query){
           var result = [];
           client.query(query, function(err, result){
             res.render('index', {connectResults: result.rows}); 
