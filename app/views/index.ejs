@@ -20,34 +20,45 @@
 				<div >
 					<h3>Twitterメッセージ</h3>
 					<span>最新情報</span>
-					<div style="text-align:right;color:gray;font-family:'ヒラギノ角ゴシック';">
-						最終ログイン：2018/07/10 23:00:52
-					</div>
 				</div>
-				<v-textarea
-				　color="red lighten-1"
-		          box
-		          name="input-2-4"
-		          label="ID：<%= connectResults[0].twitterid__c %>　　　　　　　　アカウント名：<%= connectResults[0].twitteraccount__c %>　　　　　　　　　現在時刻 ●：●●"
-		          value="<%= connectResults[0].message__c %>"
-		        ></v-textarea>
-				<v-textarea
-				　color="red lighten-1"
-		          box
-		          name="input-2-4"
-		          label="ID：<%= connectResults[1].twitterid__c %>　　　　　　　　アカウント名：<%= connectResults[1].twitteraccount__c %>　　　　　　　　　現在時刻 ●：●●"
-		          value="<%= connectResults[1].message__c %>"
-		          value2="アカウント名"
-		        ></v-textarea>
 
-				<v-textarea
-				　color="red lighten-1"
-		          box
-		          name="input-2-4"
-		          label="ID：yurikoooooooo　　　　　　　　アカウント名：ゆりこここ　　　　　　　　　現在時刻 ●：●●"
-		          value="twitter用メッセージなう"
-		          value2="アカウント名"
-		        ></v-textarea>
+		          <v-flex xs12>
+					<v-text-field
+					color="red lighten-1"
+		            label="ID：<%= connectResults[0].twitterid__c %>　　　
+		            アカウント名：<%= connectResults[0].twitteraccount__c %>　　
+		            現在時刻 ●：●●"
+		            value="<%= connectResults[0].message__c %>"
+		            outline
+            		readonly
+            		loading
+		          ></v-text-field>
+		        </v-flex>
+
+		          <v-flex xs12>
+					<v-text-field
+					color="red lighten-1"
+		            label="ID：<%= connectResults[1].twitterid__c %>　　　
+		            アカウント名：<%= connectResults[1].twitteraccount__c %>　　
+		            現在時刻 ●：●●"
+		            value="<%= connectResults[1].message__c %>"
+		            outline
+            		readonly
+		          ></v-text-field>
+		        </v-flex>
+
+		          <v-flex xs12>
+					<v-text-field
+					color="red lighten-1"
+		            label="ID：<%= connectResults[1].twitterid__c %>　　　
+		            アカウント名：<%= connectResults[1].twitteraccount__c %>　　
+		            現在時刻 ●：●●"
+		            value="<%= connectResults[1].message__c %>"
+		            outline
+            		readonly
+		          ></v-text-field>
+		        </v-flex>
+
 		    </v-container>
         </v-content>
 	</v-app>
