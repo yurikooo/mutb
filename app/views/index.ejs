@@ -21,13 +21,18 @@
 					<h3>Twitterメッセージ</h3>
 					<span>最新情報</span>
 				</div>
-
+				<%
+				var now   = new Date(); 
+				var hour  = now.getHours();
+				var min   = now.getMinutes();
+				var sec   = now.getSeconds();
+				%>
 		          <v-flex xs12>
 					<v-text-field
 					color="red lighten-1"
 		            label="ID：<%= connectResults[0].twitterid__c %>　　　
 		            アカウント名：<%= connectResults[0].twitteraccount__c %>　　
-		            現在時刻 ●：●●"
+		            現在時刻  <%= hour %>:<%= min %>:<%= sec %>"
 		            value="<%= connectResults[0].message__c %>"
 		            outline
             		readonly
@@ -40,7 +45,7 @@
 					color="red lighten-1"
 		            label="ID：<%= connectResults[1].twitterid__c %>　　　
 		            アカウント名：<%= connectResults[1].twitteraccount__c %>　　
-		            現在時刻 ●：●●"
+		            現在時刻 <%= hour %>:<%= min-1 %>:<%= sec-1 %>"
 		            value="<%= connectResults[1].message__c %>"
 		            outline
             		readonly
@@ -52,7 +57,7 @@
 					color="red lighten-1"
 		            label="ID：<%= connectResults[1].twitterid__c %>　　　
 		            アカウント名：<%= connectResults[1].twitteraccount__c %>　　
-		            現在時刻 ●：●●"
+		            現在時刻 <%= hour %>:<%= min-2 %>:<%= sec %>"
 		            value="<%= connectResults[1].message__c %>"
 		            outline
             		readonly
