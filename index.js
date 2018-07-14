@@ -77,26 +77,17 @@ app.get('/',function (req, res){
             console.log("_________________ ")
 
             console.log("Result:" + result.rows.length);
-            for(i=0; i < result.rows.length; i++){
+
+            for(var i=0; i < result.rows.length; i++){
               console.log("tw_id=" + result.rows[i].twitterid__c +" tw_account=" + result.rows[i].twitteraccount__c+" tw_message=" + result.rows[i].message__c);
+
+
              }
-             // レンダリング実行
-            //res.contentType("application/json");
-            //res.end(JSON.stringify(
-             // {i:[
-              //  "tw_id": "result.rows[i].twitterid__c",
-               // "tw_account": "result.rows[i].twitteraccount__c",
-               // "tw_message": "result.rows[i].message__c"
-               // ]
-              //}));
             res.render('index', {connectResults: result.rows});
           });
         }
-      }
-    
+      }    
 //    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
-
-
 });
 
 //更新用
