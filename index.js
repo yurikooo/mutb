@@ -55,26 +55,40 @@ app.get('/',function (req, res){
         res.render('index', {connectResults: result.rows}); 
       });
 
-      //間違った企業IDの場合のエラーハンドリング
     }else{
-      query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + 'QAN\' order by salesforce.SNS__c.id desc limit 2';
+      query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + 'QAN\' order by salesforce.SNS__c.id desc';
+      
+      //間違った企業IDの場合のエラーハンドリング
       if(!query){
           query = 'SELECT * FROM salesforce.SNS__c order by salesforce.SNS__c.id desc limit 2';
           client.query(query, function(err, result){
             res.render('index', {connectResults: result.rows}); 
           });
+
         }else{
           console.log("________query_________ ")
           console.log(query);
           console.log("________________")
 
           client.query(query, function(err, result){
-            console.log("_________________ ")
+            console.log("_________result________ ")
             console.log(result.rows[0])
             console.log(result.rows[1])
             console.log("_________________ ")
 
+            console.log("Result:" + result.rows.length);
+            for(i=0; i < result.rows.length; i++){
+              console.log("tw_id=" + result.rows[i].twitterid__c +" tw_account=" + result.rows[i].twitteraccount__c+" tw_message=" + result.rows[i].message__c);
+             }
              // レンダリング実行
+            //res.contentType("application/json");
+            //res.end(JSON.stringify(
+             // {i:[
+              //  "tw_id": "result.rows[i].twitterid__c",
+               // "tw_account": "result.rows[i].twitteraccount__c",
+               // "tw_message": "result.rows[i].message__c"
+               // ]
+              //}));
             res.render('index', {connectResults: result.rows});
           });
         }
