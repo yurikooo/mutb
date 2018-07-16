@@ -81,9 +81,51 @@
 	      source: String
 	    }
     })
+      // ツイートの取得に必要な情報を取得/設定する。
+      let offset = 0;
+      const limit = 1;
+      const accountd = "0016F00002P7OWbQAN";
+
+      // setInterval 関数により等間隔でツイートの取得を行う。
+      setInterval(() => {
+
+        // javascript 標準の fetch 関数により、heroku サーバーに GET リクエストを投げる。
+        // 正常にレスポンスが返された場合は最初の then 関数により処理されるが、エラーが起きた場合は catch 関数へ飛ぶ。
+        fetch("/tweet?offset=" + offset + "&limit=" + limit + "&accountid=" + accountd)
+          .then((response) => {
+            // fetch の仕様上 response.json() は json オブジェクトをラップした Promise オブジェクトを返すため、
+            // 次の then に渡すことでレスポンスボディに含まれるツイート情報を処理する。
+            return response.json();
+          })
+          .then((tweets) => {　
+            // heroku からのレスポンスはツイートのリストを返すため、1つ目を取得しておく。
+            const tweet = tweets[0];
+
+            // 表示用に日付をフォーマットする。
+            // 本来はツイートされた日付を表示すべきだが、
+            // デモ実施時点でのツイートを取得したように見せるため現在時刻を使う。
+            const date = new Date();
+            const formattedDate = date.getFullYear() +
+              "/" + (date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth()) +
+              "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) +
+              " " + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) +
+              ":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes());
+
+            // 表示用の DOM エレメントを作成し、ツイート情報を含める。
+            const tweetEl = document.createElement("p");
+            tweetEl.innerHTML = formattedDate + ": " + tweet.twitteraccount__c + "(@" + tweet.twitterid__c + ") says " + tweet.message__c;
+
+            // 画面に表示する。新しいツイートを上に表示するために、prepend する。
+            document.querySelector(".container").prepend(tweetEl);
+          })
+          .catch((reason) => {
+            // heroku へのアクセスにおいてエラーが発生した場合は、 コンソールに表示する。
+            console.error(reason);
+          });
+        offset++;
+      }, 3000);
+      
 	</script>
-	<script src="https://unpkg.com/vue/dist/vue.js"></script>
-	<script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 
     </body>
 </html>

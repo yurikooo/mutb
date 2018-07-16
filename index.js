@@ -90,22 +90,33 @@ app.get('/',function (req, res){
 //    var query = 'SELECT * FROM salesforce.SNS__c where salesforce.SNS__c.accountid__c = \'' + param.accountid + '\' order by salesforce.SNS__c.id desc limit 2';
 });
 
-//更新用
-app.post('/', function(req, res){
-    console.log("〜〜〜〜〜〜〜〜〜〜")
-    console.log(req.body)
-    console.log("〜〜〜〜〜〜〜〜〜〜")
+// ツイートを取得する
+// GET: /tweet?offset=0&limit=1&accountid=0016F00002P7OWbQAN
+// パラメータは以下の通り。すべてのパラメータが必須。
+// - accountid: Salesoforce の取引先レコード ID。15桁/18桁
+// - offset: 取得するレコードの開始行番号
+// - limit: 取得するレコード数
+app.get('/tweet', function(req, res) {
+　// 必要な URL クエリパラメータが全て揃っていることを確認する。
+  const param = req.query;
+  if (param.accountid && param.offset && param.limit) {
 
-    var rb = req.body;
-  
-  client.query('UPDATE salesforce.Notice__c set status__c = $1, agentcomments__c = $2 WHERE name = $3',
-        [rb['select_status'], rb['agentcomments'],rb['q_id']], (err, res) => {
-            console.log(err, res)
-        });
-    res.redirect('/');
+    // 動的に Postgres クエリを作成/発行する。
+    let query = 'SELECT * ';
+    query += 'FROM salesforce.SNS__c ';
+    query += 'WHERE';
+    query += ' salesforce.SNS__c.accountid__c LIKE \'' + param.accountid + '%\'';
+    query += ' ORDER BY salesforce.SNS__c.id ASC';
+    query += ' LIMIT ' + param.limit;
+    query += ' OFFSET ' + param.offset;
+    client.query(query, function(err, result) {
 
-    console.log("_________________ ")
-    console.log(res)
-    console.log("_________________ ")
+      // レスポンスはリストの json 形式で返す。
+      res.header('Content-Type', 'application/json; charset=utf-8');
+      if (err) res.send(err);
+      res.send(result.rows);
+    });
+  }
+
 
 });
